@@ -1,3 +1,6 @@
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { UserService } from "./_services/user.service";
 import { AuthGaurd } from "./_guards/auth.guard";
 import { appRoutes } from "./routes";
@@ -8,8 +11,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
-import { BsDropdownModule } from "ngx-bootstrap";
+import { BsDropdownModule, TabsModule } from "ngx-bootstrap";
 import { JwtModule } from "@auth0/angular-jwt";
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -22,6 +26,7 @@ import { ListsComponent } from "./lists/lists.component";
 import { MemberCardComponent } from "./members/member-card/member-card.component";
 import { MemberListComponent } from "./members/member-list/member-list.component";
 import { MessagesComponent } from "./messages/messages.component";
+import { MemberDetailComponent } from "./members/member-detail/member-detail.component";
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -37,7 +42,9 @@ export function tokenGetter() {
     ListsComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberListComponent
+    MemberListComponent,
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,9 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    NgxGalleryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -59,7 +68,9 @@ export function tokenGetter() {
     ErrorInterceptorProvider,
     AlertifyService,
     AuthGaurd,
-    UserService
+    UserService,
+    MemberDetailResolver,
+    MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })
