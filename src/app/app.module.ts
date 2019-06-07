@@ -1,6 +1,7 @@
-import { MemberEditResolver } from './_resolvers/member-edit.resolver';
-import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
+import { MemberEditResolver } from "./_resolvers/member-edit.resolver";
+import { MemberEditComponent } from "./members/member-edit/member-edit.component";
+import { MemberDetailResolver } from "./_resolvers/member-detail.resolver";
 import { UserService } from "./_services/user.service";
 import { AuthGaurd } from "./_guards/auth.guard";
 import { appRoutes } from "./routes";
@@ -13,7 +14,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { BsDropdownModule, TabsModule } from "ngx-bootstrap";
 import { JwtModule } from "@auth0/angular-jwt";
-import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxGalleryModule } from "ngx-gallery";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -70,7 +71,8 @@ export function tokenGetter() {
     AuthGaurd,
     UserService,
     MemberDetailResolver,
-    MemberEditResolver
+    MemberEditResolver,
+    PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]
 })
